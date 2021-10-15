@@ -10,11 +10,11 @@ class FirstView(ttk.Frame):
         for entry in devnames:
             self.devicesBox.insert(tk.END, entry);
 
-    def queryDevice(self):
+    async def queryDevice(self):
         idxList = self.devicesBox.curselection();
         if len(idxList):
             print("Selected ", idxList[0]);
-            self.bleHandle.getServices(idxList[0]); 
+            await self.bleHandle.getServices(idxList[0]); 
             #self.bleHandle.doPrint(idxList[0]);
             #device = self.devices[idxList[0]];
             #print(device);

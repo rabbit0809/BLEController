@@ -10,10 +10,9 @@ async def deviceScan(devices):
         devices.append(entry);
 
 async def serviceDiscovery(device, services):
-    async with BleakClient(device) as client:
-        svcs = await client.get_services();
-        for svc in svcs:
-            services.append(svc); 
+    svcs = await BleakClient(device).get_services();
+    for svc in svcs:
+        services.append(svc); 
 
 class BLEHandle:
     def __init__(self):
@@ -35,5 +34,6 @@ class BLEHandle:
             return None;
         services = []
         asyncio.run(serviceDiscovery(self.devices[idx], services));
+        print("Found ", len(services), " services for device ", self.devices[idx].name);
         for service in services:
             print(service);
